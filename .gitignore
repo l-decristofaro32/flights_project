@@ -1,0 +1,11 @@
+# Ignora gli ambienti virtuali
+myenv/
+mage_data/
+
+# Ignora file di configurazione e dati sensibili
+*.ini
+*.env
+
+# Ignora cache e altri file Python generati
+__pycache__/
+*.pyc
