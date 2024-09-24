@@ -32,6 +32,9 @@ main_path = "./flights_yyyymmdd/"
 def create_table_from_csv(csv_path, table_name):
     # Load the CSV into a DataFrame
     df = pd.read_csv(csv_path, low_memory=False)
+    
+    # Normalizza i nomi delle colonne
+    df.columns = df.columns.str.strip().str.lower().str.replace(' ', '_')
 
     with engine.connect() as connection:
         connection.execute(text(f"DROP TABLE IF EXISTS {table_name}"))
@@ -60,9 +63,12 @@ def create_table_from_csv(csv_path, table_name):
                 )
             """))
     # Use the SQLAlchemy engine with pandas to_sql method
-    with engine.connect() as connection:
-        df.to_sql(name=table_name, con=connection, if_exists='replace', index=False)
-    print(f"Tabella '{table_name}' creata e dati caricati dal file {csv_path}")
+    try:
+        with engine.connect() as connection:
+            df.to_sql(name=table_name, con=connection, if_exists='fail', index=False, chunksize=1000)
+        print(f"Tabella '{table_name}' creata e dati caricati dal file {csv_path}")
+    except Exception as e:
+        print(f"Errore durante il caricamento del file {csv_path}: {str(e)}")
 
 # Iterate through all subdirectories and CSV files
 for root, _, files in os.walk(main_path):

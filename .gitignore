@@ -1,6 +1,7 @@
 # Ignora gli ambienti virtuali
 myenv/
 mage_data/
+flights_data/
 
 # Ignora file di configurazione e dati sensibili
 *.ini
