@@ -11,7 +11,7 @@ fake = Faker()
 num_records = np.random.randint(100000)
 
 # Path to the airport codes CSV
-path_airport_codes = os.path.join(os.getcwd(), "csv_airport", "airports_codes.csv")
+path_airport_codes = os.path.join(os.getcwd(), "data_generation", "csv_airport", "airports_codes.csv")
 print(path_airport_codes)
 
 # Check if the file exists
@@ -75,7 +75,7 @@ flights_df["month"] = flights_df["scheduled_departure"].dt.strftime("%B")
 flights_df["year"] = flights_df["scheduled_departure"].dt.strftime("%Y")
 
 # Save the DataFrame to a CSV file
-output_path_folder = f"./flights_yyyymmdd"
+output_path_folder = f"./data_generation/flights_yyyymmdd"
 os.makedirs(output_path_folder, exist_ok=True)
 
 output_path = os.path.join(output_path_folder, f"flights_dataset_{datetime.now().strftime('%Y%m%d')}.csv")

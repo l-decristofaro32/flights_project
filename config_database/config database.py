@@ -4,7 +4,7 @@ import configparser
 import os
 
 # Change the current working directory
-os.chdir("../prova_dataset_aerei")
+os.chdir("../flights_project")
 
 # Print the current working directory
 print("Attuale cartella", os.getcwd())
@@ -27,7 +27,7 @@ db_name = config['database']['name']
 engine = create_engine(f'postgresql+psycopg2://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
 
 # Path to the main directory containing CSV files
-main_path = "./flights_yyyymmdd/"
+main_path = "./data_generation/flights_yyyymmdd/"
 
 def create_table_from_csv(csv_path, table_name):
     # Load the CSV into a DataFrame
